@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para ti, Juliana ❤️</title>
+<meta name="description" content="Un regalo hecho a mano para Juliana: nuestras fotos, nuestra canción y el tiempo que llevamos juntos.">
+<meta name="theme-color" content="#e84393">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Para ti, Juliana">
+<meta property="og:title" content="Para ti, Juliana ❤️">
+<meta property="og:description" content="Nuestras fotos, nuestra canción y el tiempo que llevamos juntos, contado hasta el segundo.">
+<meta property="og:url" content="https://markyy1991.github.io/juliana/">
+<meta property="og:image" content="https://markyy1991.github.io/juliana/fotos/foto1.jpg">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%E2%9D%A4%EF%B8%8F</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
@@ -97,42 +108,56 @@
     border-radius: 16px;
   }
 
-  /* La tarjeta que sale del sobre al abrirlo */
+  /* Al abrirse, la tarjeta puede salir sin quedar recortada */
+  .sobre.abierto .sobre-cuerpo { overflow: visible; }
+
+  /* La tarjeta con vuestra foto, que sale del sobre al abrirlo */
   .sobre-carta {
     position: absolute;
-    left: 8%;
-    right: 8%;
-    top: 10%;
-    height: 80%;
+    left: 9%;
+    right: 9%;
+    top: 12%;
+    height: 76%;
+    padding: 7px;
     background: #fffafc;
     border-radius: 10px;
-    box-shadow: 0 6px 18px rgba(194,24,91,.18);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    box-shadow: 0 8px 20px rgba(194,24,91,.22);
     z-index: 2;
-    transition: transform .8s cubic-bezier(.34,1.4,.5,1) .25s;
+    transition: transform .9s cubic-bezier(.34,1.4,.5,1) .2s;
   }
 
   .sobre.abierto .sobre-carta {
-    transform: translateY(-72%) rotate(-2deg);
+    transform: translateY(-78%) rotate(-2deg);
+    z-index: 6;
   }
 
   .sobre-foto {
-    width: 78px;
-    height: 78px;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border: 3px solid #ffd1e0;
-    box-shadow: 0 6px 16px rgba(194,24,91,.25);
+    border-radius: 6px;
+    display: block;
   }
 
-  .sobre-nombre {
+  /* Los nombres, en la cara del sobre */
+  .sobre-nombres {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 23%;
+    z-index: 5;
+    pointer-events: none;
     font-family: 'Dancing Script', cursive;
-    font-size: 1.8rem;
-    color: var(--rosa-oscuro);
+    font-size: clamp(1.35rem, 5.6vw, 1.85rem);
+    line-height: 1;
+    color: #fffafc;
+    text-shadow: 0 2px 10px rgba(194,24,91,.55), 0 0 20px rgba(194,24,91,.35);
+  }
+
+  .sobre-nombres em {
+    font-style: normal;
+    font-size: .75em;
+    opacity: .95;
   }
 
   /* Solapa (triángulo) que se abre hacia arriba */
@@ -148,6 +173,7 @@
 
   .sobre.abierto .sobre-solapa {
     transform: rotateX(178deg);
+    z-index: 1;
   }
 
   /* Frente del sobre, por delante de la tarjeta */
@@ -540,6 +566,182 @@
     100% { transform: translateY(112vh) rotate(720deg); opacity: 0; }
   }
 
+  /* ============ DETALLES DE PULIDO ============ */
+  /* Letra capitular en la dedicatoria */
+  .carta .entrada::first-letter {
+    float: left;
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.4em;
+    line-height: .8;
+    padding: .06em .08em 0 0;
+    color: var(--rosa-oscuro);
+  }
+
+  /* Comillas tipograficas en la frase que rota */
+  .frase::before { content: '\00AB\00A0'; }
+  .frase::after  { content: '\00A0\00BB'; }
+
+  /* Enlace para seguir bajando */
+  .desliza {
+    display: inline-block;
+    margin-top: 26px;
+    font-size: .92rem;
+    color: var(--rosa-oscuro);
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(194,24,91,.45);
+    padding-bottom: 2px;
+    animation: flotaSuave 2.4s ease-in-out infinite;
+  }
+
+  .desliza:hover { opacity: .7; }
+
+  @keyframes flotaSuave {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(6px); }
+  }
+
+  /* Contador de fotos del carrusel */
+  .contador-fotos {
+    margin-top: 20px;
+    font-size: .88rem;
+    letter-spacing: .18em;
+    color: var(--rosa-oscuro);
+    opacity: .75;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* El boton flotante late mientras suena la cancion */
+  #btn-musica.sonando { animation: latido 1.8s ease-in-out infinite; }
+
+  /* Aparicion suave al bajar (la clase la pone el JS, sin JS todo se ve) */
+  .aparece {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity .9s ease, transform .9s ease;
+  }
+
+  .aparece.visible-aparece {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Para quien prefiere menos movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .001ms !important;
+    }
+    .aparece { opacity: 1; transform: none; }
+  }
+
+  /* ============ FOTO A PANTALLA COMPLETA ============ */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 14px;
+    padding: 26px 18px;
+    background: rgba(32, 10, 20, .93);
+    backdrop-filter: blur(6px);
+    text-align: center;
+  }
+
+  .lightbox.abierto { display: flex; }
+
+  .lightbox img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 30px 70px rgba(0,0,0,.6);
+  }
+
+  .lightbox p {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.45rem;
+    color: #ffd9e6;
+    max-width: 90vw;
+  }
+
+  .lightbox-cerrar,
+  .lightbox-flecha {
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,.15);
+    color: #fff;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background .2s;
+  }
+
+  .lightbox-cerrar:hover,
+  .lightbox-flecha:hover { background: rgba(255,255,255,.3); }
+
+  .lightbox-cerrar { top: 14px; right: 16px; }
+  .lightbox-flecha { top: 50%; transform: translateY(-50%); }
+  .lightbox-flecha.izq { left: 14px; }
+  .lightbox-flecha.der { right: 14px; }
+
+  body.con-lightbox { overflow: hidden; }
+
+  /* ============ 10 COSAS SOBRE TI ============ */
+  .cosas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    max-width: 840px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .cosa {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: rgba(255,255,255,.9);
+    padding: 18px 20px;
+    border-radius: 18px;
+    box-shadow: 0 10px 26px rgba(194,24,91,.14);
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+
+  .cosa:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 34px rgba(194,24,91,.22);
+  }
+
+  .cosa-numero {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.9rem;
+    line-height: 1;
+    color: var(--rosa);
+    min-width: 28px;
+  }
+
+  .cosa p {
+    font-size: 1.02rem;
+    line-height: 1.55;
+    color: var(--texto);
+  }
+
+  .cosas-pie {
+    margin-top: 28px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: var(--rosa-oscuro);
+  }
+
   /* ============ FINAL ============ */
   .final {
     background: radial-gradient(circle at 50% 40%, rgba(255,255,255,.55), transparent 60%);
@@ -565,11 +767,11 @@
       <div class="sobre-cuerpo">
         <div class="sobre-fondo"></div>
         <div class="sobre-carta">
-          <!-- Cambia fotos/foto1.jpg por la foto que quieras que se vea en el sobre -->
-          <img class="sobre-foto" src="fotos/foto1.jpg" alt="Nosotros">
-          <p class="sobre-nombre">Para Juliana</p>
+          <!-- Foto de la pareja en el sobre: cambia el nombre si subes otra -->
+          <img class="sobre-foto" src="fotos/foto_sobre.jpg" alt="Juliana y Marcos">
         </div>
         <div class="sobre-frente"></div>
+        <p class="sobre-nombres">Juliana <em>y</em> Marcos</p>
         <div class="sobre-solapa"></div>
       </div>
     </div>
@@ -593,8 +795,8 @@
     <div class="dedicacion-carta">
       <div class="carta">
         <p>Juliana,</p>
-        <p>No sé en qué momento exacto dejaste de ser alguien más y te convertiste en mi lugar favorito del mundo. Solo sé que un día empecé a contar los días pensando en ti, y ya no supe parar.</p>
-        <p>Me gusta cómo te ríes cuando algo te hace gracia de verdad, cómo cuentas las cosas con las manos, cómo se te nota en la cara cuando estás contenta. Me gusta que contigo no tengo que fingir nada: puedo estar cansado, tonto o en silencio, y aun así sé que estás.</p>
+        <p class="entrada">No sé en qué momento exacto dejaste de ser alguien más y te convertiste en mi lugar favorito del mundo. Solo sé que un día empecé a contar los días pensando en ti, y ya no supe parar.</p>
+        <p>Me gusta cómo te ríes cuando algo te hace gracia de verdad, cómo cuentas las cosas, cómo se te nota en la cara cuando estás contenta. Me gusta que contigo no tengo que fingir nada: puedo estar cansado, tonto o en silencio, y aun así sé que estás.</p>
         <p>Gracias por quedarte los días en los que no soy fácil, por celebrar mis cosas pequeñas como si fueran enormes y por dejarme cuidarte cuando te toca a ti. Contigo hasta lo normal se siente distinto.</p>
         <p>Si algún día me preguntas qué es lo mejor que me ha pasado, no voy a dudar ni un segundo. Eres tú.</p>
         <p class="firma">Tuyo, siempre ❤️</p>
@@ -602,9 +804,28 @@
     </div>
 
     <p class="frase" id="frase">Eres mi casualidad favorita.</p>
+    <a class="desliza" href="#cosas">Desliza para seguir ↓</a>
   </section>
 
-  <!-- 3. GALERÍA: marco de fotos deslizable (oculta hasta abrir el sobre) -->
+  <!-- 3. DIEZ COSAS SOBRE TI -->
+  <section id="cosas">
+    <h2>10 cosas sobre ti</h2>
+    <div class="cosas">
+      <div class="cosa"><span class="cosa-numero">1</span><p>Cómo te ríes cuando algo te hace gracia de verdad.</p></div>
+      <div class="cosa"><span class="cosa-numero">2</span><p>Que preguntas cómo estoy y de verdad quieres saberlo.</p></div>
+      <div class="cosa"><span class="cosa-numero">3</span><p>Tu forma de contar las cosas.</p></div>
+      <div class="cosa"><span class="cosa-numero">4</span><p>Que me sacas una sonrisa incluso en los días grises.</p></div>
+      <div class="cosa"><span class="cosa-numero">5</span><p>Lo bien que hueles cuando me abrazas.</p></div>
+      <div class="cosa"><span class="cosa-numero">6</span><p>Que te emocionas con cosas pequeñas.</p></div>
+      <div class="cosa"><span class="cosa-numero">7</span><p>Cómo cuidas a la gente que quieres.</p></div>
+      <div class="cosa"><span class="cosa-numero">8</span><p>Que contigo el silencio también está cómodo.</p></div>
+      <div class="cosa"><span class="cosa-numero">9</span><p>Tu cara cuando te despiertas y aún no has hablado.</p></div>
+      <div class="cosa"><span class="cosa-numero">10</span><p>Que siempre eliges quedarte.</p></div>
+    </div>
+    <p class="cosas-pie">Y podría seguir hasta el infinito ❤️</p>
+  </section>
+
+  <!-- 4. GALERÍA: marco de fotos deslizable (oculta hasta abrir el sobre) -->
   <section id="galeria">
     <h2>Nuestros momentos</h2>
 
@@ -631,11 +852,12 @@
       <button class="flecha der" id="foto-next" type="button" aria-label="Foto siguiente">›</button>
     </div>
 
+    <p class="contador-fotos" id="contador-fotos">1 / 12</p>
     <div class="puntos" id="puntos"></div>
-    <p class="subtitulo">Desliza para ver más ❤️</p>
+    <p class="subtitulo">Desliza para cambiar · toca una foto para verla entera ❤️</p>
   </section>
 
-  <!-- 4. CARTA -->
+  <!-- 5. CARTA -->
   <section>
     <h2>Para ti</h2>
     <div class="carta">
@@ -645,7 +867,7 @@
     </div>
   </section>
 
-  <!-- 5. CANCIÓN -->
+  <!-- 6. CANCIÓN -->
   <section id="reproductor">
     <h2>Nuestra canción</h2>
     <p class="subtitulo" style="margin-bottom:28px;">Suena desde que abres el sobre 🎶</p>
@@ -656,12 +878,21 @@
     </div>
   </section>
 
-  <!-- 6. FINAL -->
+  <!-- 7. FINAL -->
   <section class="final">
     <h1>Te quiero</h1>
     <p class="subtitulo">Gracias por ser parte de mi vida, Juliana.</p>
     <button class="boton" id="btn-amor" style="margin-top:26px;">Pulsa para más amor 💕</button>
   </section>
+
+  <!-- FOTO COMPLETA -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto ampliada">
+    <button class="lightbox-cerrar" id="lightbox-cerrar" type="button" aria-label="Cerrar">✕</button>
+    <button class="lightbox-flecha izq" id="lightbox-prev" type="button" aria-label="Foto anterior">‹</button>
+    <img id="lightbox-img" src="" alt="">
+    <p id="lightbox-pie"></p>
+    <button class="lightbox-flecha der" id="lightbox-next" type="button" aria-label="Foto siguiente">›</button>
+  </div>
 
   <button id="btn-musica" title="Música" aria-label="Reproducir o pausar la música">🎵</button>
 
@@ -781,6 +1012,7 @@
     const sonando = !audio.paused;
     btnPlay.textContent = sonando ? '⏸ Pausar' : '▶ Reproducir';
     btnMusica.textContent = sonando ? '🎵' : '🔇';
+    btnMusica.classList.toggle('sonando', sonando);
     btnMusica.classList.toggle('parpadea', !sonando && musicaBloqueada);
   }
 
@@ -850,6 +1082,7 @@
   const puntos = document.getElementById('puntos');
   const btnPrev = document.getElementById('foto-prev');
   const btnNext = document.getElementById('foto-next');
+  const contadorFotos = document.getElementById('contador-fotos');
 
   if (pista && ventana && puntos) {
     const total = pista.children.length;
@@ -863,6 +1096,9 @@
       Array.prototype.forEach.call(puntos.children, (p, i) => {
         p.classList.toggle('activo', i === indice);
       });
+      if (contadorFotos) {
+        contadorFotos.textContent = (indice + 1) + ' / ' + total;
+      }
     }
 
     for (let i = 0; i < total; i++) {
@@ -914,16 +1150,58 @@
     pista.addEventListener('pointerup', soltar);
     pista.addEventListener('pointercancel', soltar);
 
-    /* Corazones al tocar la foto (si no fue un arrastre) */
-    Array.prototype.forEach.call(pista.children, (slide) => {
+    /* ---------- Foto a pantalla completa ---------- */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxPie = document.getElementById('lightbox-pie');
+    let fotoAbierta = 0;
+
+    function abrirFoto(n) {
+      if (!lightbox) return;
+      fotoAbierta = (n + total) % total;
+      const slide = pista.children[fotoAbierta];
+      const img = slide.querySelector('img');
+      const pie = slide.querySelector('p');
+      if (!img) return;
+      lightboxImg.src = img.getAttribute('src');
+      lightboxImg.alt = img.getAttribute('alt') || 'Foto';
+      lightboxPie.textContent = pie ? pie.textContent : '';
+      lightbox.classList.add('abierto');
+      document.body.classList.add('con-lightbox');
+    }
+
+    function cerrarFoto() {
+      if (!lightbox) return;
+      lightbox.classList.remove('abierto');
+      document.body.classList.remove('con-lightbox');
+    }
+
+    if (lightbox) {
+      document.getElementById('lightbox-cerrar').addEventListener('click', cerrarFoto);
+      document.getElementById('lightbox-prev').addEventListener('click', () => abrirFoto(fotoAbierta - 1));
+      document.getElementById('lightbox-next').addEventListener('click', () => abrirFoto(fotoAbierta + 1));
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) cerrarFoto();
+      });
+    }
+
+    /* Corazones al tocar la foto y abrirla entera (si no fue un arrastre) */
+    Array.prototype.forEach.call(pista.children, (slide, i) => {
       slide.addEventListener('click', () => {
         if (arrastrado) { arrastrado = false; return; }
         lanzarCorazones(6);
+        abrirFoto(i);
       });
     });
 
-    /* Flechas del teclado cuando la galería está visible */
+    /* Teclado: primero la foto ampliada, luego el carrusel */
     document.addEventListener('keydown', (e) => {
+      if (lightbox && lightbox.classList.contains('abierto')) {
+        if (e.key === 'Escape') cerrarFoto();
+        if (e.key === 'ArrowRight') abrirFoto(fotoAbierta + 1);
+        if (e.key === 'ArrowLeft') abrirFoto(fotoAbierta - 1);
+        return;
+      }
       if (galeria.style.display !== 'block') return;
       if (e.key === 'ArrowRight') irA(indice + 1);
       if (e.key === 'ArrowLeft') irA(indice - 1);
@@ -935,6 +1213,24 @@
     lanzarCorazones(30);
     lanzarConfeti();
   });
+
+  /* ---------- Aparicion suave al bajar por la pagina ---------- */
+  const secciones = document.querySelectorAll('section:not(#galeria):not(#dedicatoria)');
+  if ('IntersectionObserver' in window) {
+    const observador = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada) => {
+        if (entrada.isIntersecting) {
+          entrada.target.classList.add('visible-aparece');
+          observador.unobserve(entrada.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    Array.prototype.forEach.call(secciones, (s) => {
+      s.classList.add('aparece');
+      observador.observe(s);
+    });
+  }
 
   /* ---------- Corazones ambientales ---------- */
   setInterval(crearCorazon, 1600);
