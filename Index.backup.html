@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para ti, Juliana ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;600&family=Playfair+Display:wght@400;600;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #ffe8f0, #ffc8d7 50%, #fdd0e0);
+      color: #d6336c;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Fondo de corazones sutiles */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: repeating-radial-gradient(
+        circle at 20% 30%, #fff 0, #fff 5%, #ffd1e0 10%, #ffd1e0 15%, #ffc2db 20%,        #ffc2db 25%, #ffb3c6 30%, #ffb3c6 35%);      pointer-events: none;      z-index: -1;    }
+
+    /* Decoración de corazones pequeños en el background */    .corazon-pequeno {      position: fixed;      width: 8px; height: 8px;      background: #ff69b4;      border-radius: 50%;      opacity: 0.3;      animation: flotar 8s infinite ease-in-out;    }    @keyframes flotar {      0%, 100% { transform: translateY(110vh) scale(0.5); opacity: 0.2; }      50% { transform: translateY(-10vh) scale(1); opacity: 0.5; }    }
+    .container {      max-width: 900px;      margin: 0 auto;    }
+
+    /* Estilos para el sobre inicial */    #sobre-inicial {      min-height: 100vh;      display: flex;      flex-direction: column;      align-items: center;      justify-content: center;      padding: 20px;      position: relative;      z-index: 1;    }    .sobre-contenido {      width: 300px; height: 200px;      background: linear-gradient(135deg, #ffd1e0 0, #ffb3c6 100%);      border-radius: 12px; position: relative; cursor: pointer; box-shadow: 0 15px 40px rgba(255,182,217,.4);      transition: transform .3s;    }    .sobre-contenido:hover {      transform: scale(1.05);    }    .sobre-flap {      position: absolute; width: 100%; height: 100%; border-radius: 12px; background: #ffe8f0;)      backface-visibility: hidden; transition: transform .6s cubic-bezier(0.4, 0, 0.2, 1);    }    .sobre-flap.superior {      z-index: 2; transform: rotateX(0deg);    }    .sobre-flap.inferior {      z-index: 1; transform: rotateX(-180deg);    }    .sobre-contenido.abierto .sobre-flap.superior {      transform: rotateX(-180deg);    }    .sobre-contenido.abierto .sobre-flap.inferior {      transform: rotateX(0deg);    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 20px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {      font-family: 'Dancing Script', cursive;      font-size: clamp(3.5rem, 14vw, 6rem);      color: #d6336c;      text-shadow: 3px 3px 12px rgba(214,51,108,.7),        0 0 30px rgba(255,182,217,.5);      letter-spacing: -0.02em;    }h2 {      font-family: 'Dancing Script', cursive;      font-size: clamp(2.5rem, 9vw, 3.5rem);      color: #d6336c;      text-shadow: 2px 2px 8px rgba(214,51,108,.7);      margin-bottom: 30px;    }
+
+    .subtitulo { font-size: 1.2rem; color: #d6336c; text-shadow: 1px 1px 6px rgba(214,51,108,.5); margin-top: 20px; font-weight: 400; }.contador {      margin-top: 25px;      font-size: 1.2rem;      background: rgba(255,255,255,.8);      padding: 20px 35px;      border-radius: 50px;      box-shadow: 0 8px 25px rgba(214,51,108,.15);      backdrop-filter: blur(10px);    }
+
+    .contador strong { color: #c2185b; font-size: 1.5rem; }.boton {      margin: 15px 10px;      padding: 16px 36px;      font-family: 'Quicksand', sans-serif;      font-size: 1.15rem;      font-weight: 600;      color: white;      background: #e84393;      border: none;      border-radius: 50px;      cursor: pointer;      box-shadow: 0 8px 25px rgba(232,67,147,.5);      transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);      position: relative;      overflow: hidden;    }
+    .boton::before {      content: '';      position: absolute;      top: 0; left: -100%;      width: 100%;      height: 100%;      background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);      transition: left .5s;    }
+    .boton:hover::before { left: 100%; }
+    .boton:hover { transform: scale(1.08) translateY(-2px); box-shadow: 0 12px 35px rgba(232,67,147,.6); }
+    .boton:active { transform: scale(0.98) translateY(2px); }
+    .boton span { position: relative; z-index: 1; }.galeria {      display: grid;      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));      gap: 30px;      max-width: 1100px;      width: 100%;      padding: 20px 0;    }
+    .galeria::before {      content: '';      position: absolute;      top: -50px; left: 50%;      transform: translateX(-50%);      width: 80px; height: 80px;      background: radial-gradient(circle, #ffd1e0 0, #ffb3c6 50%);      border-radius: 50%;      opacity: 0.6;    }.foto {      background: rgba(255,255,255,.8);      padding: 12px 12px 20px;      border-radius: 16px;      box-shadow: 0 10px 30px rgba(0,0,0,.2),        0 0 20px rgba(255,182,217,.1);      transform: rotate(var(--giro, 0deg));      transition: transform .4s cubic-bezier(0.4, 0, 0.2, 1);      position: relative;      overflow: hidden;    }
+    .foto::before {      content: '';      position: absolute;      top: 0; left: 0; width: 100%; height: 100%;      background: linear-gradient(135deg, transparent 0%, rgba(255,182,217,.03) 100%);      pointer-events: none;    }
+    .foto:hover { transform: rotate(0deg) scale(1.03); box-shadow: 0 15px 40px rgba(0,0,0,.3),        0 0 30px rgba(255,182,217,.2); }
+    .foto img {      width: 100%;      height: 320px;      object-fit: contain;      background: #fdf0f4;      border-radius: 10px;      transition: transform .4s;    }
+    .foto:hover img { transform: scale(1.02); }
+    .foto p {      font-family: 'Dancing Script', cursive;      font-size: 1.3rem;      color: #d6336c;      margin-top: 12px;    }
+
+    .foto img {
+      width: 100%;
+      height: 280px;
+      object-fit: contain;          /* muestra la foto entera, sin recortes */
+      background: #fdf0f4;          /* fondo suave donde la foto no ocupa todo el hueco */
+      border-radius: 8px;
+      display: block;
+    }
+
+    .foto p {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.4rem;
+      color: #c2185b;
+      margin-top: 10px;
+    }.carta {      background: rgba(255,255,255,.9);      padding: 40px 35px;      border-radius: 24px;      max-width: 680px;      font-size: 1.2rem;      line-height: 2;      margin: 0 15px;      box-shadow: 0 15px 45px rgba(0,0,0,.2),        0 0 50px rgba(255,182,217,.15);      backdrop-filter: blur(20px);      border: 1px solid rgba(255,255,255,.3);    }
+
+    .carta .firma {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      color: #c2185b;
+      margin-top: 20px;
+    }.caja-audio {      background: rgba(255,255,255,.9);      padding: 30px 35px;      border-radius: 32px;      max-width: 460px;      width: 100%;      box-shadow: 0 15px 45px rgba(0,0,0,.2),        0 0 50px rgba(255,182,217,.15);      backdrop-filter: blur(20px);      border: 1px solid rgba(255,255,255,.3);    }.corazon {      position: fixed;      bottom: -30px;      font-size: 28px;      pointer-events: none;      z-index: 0;      animation: subir linear forwards;    }
+    @keyframes subir {      0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }      25% { opacity: 0.8; }      50% { transform: translateY(50vh) rotate(180deg); opacity: 0.6; }      75% { opacity: 0.8; }      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }    }    .corazon-pequeno {      position: fixed;      width: 6px; height: 6px;      background: #ff69b4;      border-radius: 50%;      opacity: 0.4;      animation: flotar 7s infinite ease-in-out;    }    @keyframes flotar {      0%, 100% { transform: translateY(110vh) scale(0.3); opacity: 0.2; }      50% { transform: translateY(-20vh) scale(1); opacity: 0.5; }    }    .corazon-grande {      position: fixed;      width: 14px; height: 14px;      background: #ff1493;      border-radius: 50%;      opacity: 0.6;      animation: latir 2s infinite ease-in-out;    }    @keyframes latir {      0%, 100% { transform: scale(0.8); opacity: 0.5; }      50% { transform: scale(1.3); opacity: 1; }    }    
+    @keyframes latido-suave {      0%, 100% { transform: translateY(0) scale(1); }      50% { transform: translateY(-20px) scale(1.1); }    }
+
+    @keyframes subir {
+      to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    }
+
+    .final h2 { font-family: 'Dancing Script', cursive;      font-size: clamp(3rem, 12vw, 5rem);      color: #d6336c;      text-shadow: 3px 3px 12px rgba(214,51,108,.7);      letter-spacing: -0.02em;    }
+  </style>
+</head>
+<body><!-- 1. Sobre inicial -->
+  <section id="sobre-inicial">    <div class="sobre-contenido" onclick="abrirSobre()">      <div class="sobre-flap superior"></div>      <div class="sobre-flap inferior"></div>      <p style="position:absolute; top:30px; color:#d6336c; font-family:'Dancing Script', cursive; font-size:2rem;">❤️</p>      <p style="position:absolute; bottom:30px; color:#d6336c; font-family:'Dancing Script', cursive; font-size:1.2rem;">Abre para comenzar ❤️</p>      <div style="position:absolute; top:120px; color:#d6336c; font-size:1rem;">Llevamos juntos <strong id="dias-sobre">0</strong> días</div>    </div>  </section>
+
+  <!-- 3. Carta -->
+  <section>    <h2>Para ti</h2>
+    <div class="carta" id="carta-contenido">      <p class="letter-text">        Gracias por cada sonrisa, cada abrazo y cada momento compartido.      </p>      <p class="letter-text" style="margin-top:20px;">        Te quiero más de lo que cabe en un papel.      </p>      <p class="firma">Con todo mi amor, tu nombre      </p>    </div>    <script>      // Efecto de escritura para la carta      const carta = document.getElementById('carta-contenido');      const textos = [        'Gracias por cada sonrisa, cada abrazo y cada momento compartido.',        'Te quiero más de lo que cabe en un papel.',        'Eres mi persona favorita con quien compartir los días.',        'Gracias por ser el mejor regalo de mi vida.',      ];      let textoIndex = 0;      let charIndex = 0;      let deletando = false;      let velocidad = 50;            function tipoLetra() {        const p = carta.querySelector('.letter-text');                if (deletando) {          charIndex--;          p.textContent = textos[textoIndex].substring(0, charIndex);        } else {          charIndex++;          p.textContent = textos[textoIndex].substring(0, charIndex);        }                if (!deletando && charIndex < textos[textoIndex].length + 1) {          setTimeout(tipoLetra, velocidad);        } else if (deletando && charIndex >= 0) {          setTimeout(tipoLetra, velocidad);        } else if (!deletando && charIndex >= textos[textoIndex].length + 1) {          deletando = true;          setTimeout(tipoLetra, 1000);        } else if (deletando && charIndex < 0) {          deletando = false;          textoIndex = (textoIndex + 1) % textos.length;          setTimeout(tipoLetra, 500);        }      }            // Iniciar efecto cuando la página carga      window.addEventListener('load', () => {        setTimeout(() => {          tipoLetra();        }, 500);      });    </script>  </section>
+
+  <!-- 2. Galería (queda oculta hasta que se abre el sobre) -->
+  <section id="galeria" style="display:none;">    <h2>Nuestros momentos</h2>    <div class="galeria">      <div class="foto" style="--giro:-3deg">        <img src="fotos/foto1.jpg" alt="Foto 1">        <p>Nuestra primera vez juntos</p>      </div>      <div class="foto" style="--giro:2deg">        <img src="fotos/foto2.jpg" alt="Foto 2">        <p>Ese día que nos reímos sin parar</p>      </div>      <div class="foto" style="--giro:-2deg">        <img src="fotos/foto3.jpg" alt="Foto 3">        <p>Nuestra escapada favorita</p>      </div>      <div class="foto" style="--giro:3deg">        <img src="fotos/foto4.jpg" alt="Foto 4">        <p>Contigo, todo es mejor</p>      </div>      <div class="foto" style="--giro:-1deg">        <img src="fotos/foto5.jpg" alt="Foto 5">        <p>Cada día contigo es un regalo</p>      </div>      <div class="foto" style="--giro:2deg">        <img src="fotos/foto6.jpg" alt="Foto 6">        <p>Tu sonrisa lo cambia todo</p>      </div>      <div class="foto" style="--giro:-3deg">        <img src="fotos/foto7.jpg" alt="Foto 7">        <p>Un plan perfecto con alguien perfecto</p>      </div>      <div class="foto" style="--giro:1deg">        <img src="fotos/foto8.jpg" alt="Foto 8">        <p>Mi lugar favorito es a tu lado</p>      </div>      <div class="foto" style="--giro:-2deg">        <img src="fotos/foto9.jpg" alt="Foto 9">        <p>Nuestros pequeños grandes momentos</p>      </div>      <div class="foto" style="--giro:3deg">        <img src="fotos/foto10.jpg" alt="Foto 10">        <p>Contigo hasta en los días sencillos</p>      </div>      <div class="foto" style="--giro:-1deg">        <img src="fotos/foto11.jpg" alt="Foto 11">        <p>Así de felices nos ponemos juntos</p>      </div>      <div class="foto" style="--giro:2deg">        <img src="fotos/foto12.jpg" alt="Foto 12">        <p>Y lo que nos queda por vivir</p>      </div>    </div>  </section>
+
+  <!-- 4. Canción -->
+  <section id="reproductor">
+    <h2>Nuestra canción</h2>
+    <p class="subtitulo" style="margin-bottom:25px;">Nuestra canción suena al abrir la web 🎶</p>
+    <div class="caja-audio">
+      <audio id="cancion" preload="auto" src="cancion.mp3"></audio>
+      <button class="boton" id="btn-play" style="margin-top:0;">▶ Reproducir</button>
+      <p id="aviso" style="margin-top:15px;color:#c2185b;"></p>
+    </div>
+  </section>
+
+  <!-- 5. Final -->
+  <section class="final">
+    <h2>Te quiero ❤️</h2>
+    <p class="subtitulo">Gracias por ser parte de mi vida.</p>
+    <button class="boton" onclick="lanzarCorazones(40); lanzarConfeti()">Pulsa para más amor 💕</button>
+  </section>
+
+  <script>// ----- CONTADOR DE DÍAS ESPECIALES -----
+    // Fecha de inicio: 23 de octubre de 2025
+    const fechaInicio = new Date(2025, 9, 23);
+    // Fecha de aniversario: 14 de febrero (día de los enamorados)
+    const fechaAniversario = new Date(new Date().getFullYear(), 1, 14);
+    // Si ya pasó el aniversario de este año, usamos el del próximo
+    if (new Date() > fechaAniversario) {      fechaAniversario.setFullYear(fechaAniversario.getFullYear() + 1);    }
+    
+    function actualizarContador() {      const ahora = new Date();      const diasJuntos = Math.floor((ahora - fechaInicio) / (1000 * 60 * 60 * 24));      const diasAniversario = Math.floor((fechaAniversario - ahora) / (1000 * 60 * 60 * 24));            const elementoDias = document.getElementById('dias-sobre');
+    if (elementoDias) {
+      elementoDias.textContent = diasJuntos;
+    }
+    const avisoAniversario = document.getElementById('aviso-aniversario');      if (diasAniversario >= 0 && diasAniversario <= 30) {        avisoAniversario.style.display = 'block';        avisoAniversario.textContent = `¡Falta ${diasAniversario} días para nuestro aniversario! ❤️`;      } else {        avisoAniversario.style.display = 'none';      }    }    
+    actualizarContador();    setInterval(actualizarContador, 1000 * 60 * 60); // Actualizar cada hora// Función para abrir el sobre    function abrirSobre() {      const sobre = document.getElementById('sobre-inicial');
+      const galeria = document.getElementById('galeria');
+      const audio = document.getElementById('cancion');
+      const avisoEl = document.getElementById('aviso');
+            // Animar el cierre del sobre      sobre.style.transition = 'transform .6s, opacity .6s';      sobre.style.transform = 'scale(0.5)';      sobre.style.opacity = '0';
+      
+      // Mostrar la galería después de la animación      setTimeout(() => {        galeria.style.display = 'block';        
+        // Trigger reflow for transition        galeria.offsetHeight;        galeria.style.transition = 'opacity .5s';
+        galeria.style.opacity = '1';
+        
+        // Intentar reproducir la canción después de la interacción del usuario (después de hacer click en el sobre)        audio.play().catch(() => {
+          avisoEl.textContent = 'Toca la pantalla para escuchar nuestra canción';
+        });
+      }, 600);
+    }
+
+    // Iniciar el contador y configurar el audio
+    actualizarContador();
+    setInterval(actualizarContador, 1000 * 60 * 60); // Actualizar cada hora
+
+    // Mostrar días juntos al pasar el mouse sobre el contador
+    const contadorEl = document.querySelector('.contador');
+    contadorEl.addEventListener('mouseenter', () => {
+      contadorEl.style.transition = 'transform .3s';
+      contadorEl.style.transform = 'scale(1.05)';
+    });
+    contadorEl.addEventListener('mouseleave', () => {
+      contadorEl.style.transform = 'scale(1)';
+    });// ----- CORAZONES FLOTANTES DE AMOR -----
+    const emojis = ['❤️', '💖', '💕', '💗', '🌹', '💞', '💓'];
+    const corazonesParpadeantes = [];
+    
+    function crearCorazon() {      const c = document.createElement('span');      c.className = 'corazon-pequeno';      const emoji = emojis[Math.floor(Math.random() * emojis.length)];      c.textContent = emoji;      c.style.left = Math.random() * 100 + 'vw';      c.style.top = '110vh';      c.style.animationDuration = (6 + Math.random() * 4) + 's';      c.style.animationDelay = Math.random() * 2 + 's';      c.style.fontSize = (10 + Math.random() * 12) + 'px';      document.body.appendChild(c);
+      
+      // Quitar después de la animación
+      setTimeout(() => {
+        if (c.parentElement) {
+          c.remove();
+        }
+      }, (c.style.animationDuration * 1000 + 2000));
+    }
+    
+    // Corazones automáticos cada 500ms
+    setInterval(() => crearCorazon(), 500);
+    
+    // Corazones al hacer click en el botón final
+    function lanzarCorazones(cantidad = 20) {      for (let i = 0; i < cantidad; i++) {        setTimeout(() => crearCorazon(), i * 50);      }    }
+
+    // Efecto de corazón al hacer click en las fotos
+    const fotos = document.querySelectorAll('.foto');
+    fotos.forEach(foto => {      foto.addEventListener('click', () => {        // Crear efecto de heart burst
+        const burst = 5;        for (let i = 0; i < burst; i++) {          setTimeout(() => crearCorazon(), i * 100);        }        
+        // Efecto de escala en la foto
+        foto.style.transition = 'transform .2s';
+        foto.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          foto.style.transform = '';
+        }, 200);
+      });
+    });// ----- REPRODUCTOR DE LA CANCIÓN -----
+    const audio = document.getElementById('cancion');
+    const btnPlay = document.getElementById('btn-play');
+    const aviso = document.getElementById('aviso');
+    
+    // Sincroniza el botón con el estado real del audio    audio.addEventListener('play', () => {
+      btnPlay.textContent = '⏸ Pausar';
+      aviso.textContent = '';
+      quitarInicioAlTocar();
+    });
+    audio.addEventListener('pause', () => {
+      btnPlay.textContent = '▶ Reproducir';
+    });
+    audio.addEventListener('ended', () => {
+      btnPlay.textContent = '▶ Reproducir';
+    });
+    audio.addEventListener('error', () => {
+      aviso.textContent = 'No se encuentra el archivo cancion.mp3. Comprueba el nombre y que esté en la misma carpeta que index.html.';
+    });
+    
+    // Botón manual: reproducir / pausar    btnPlay.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play().catch(() => {
+          if (!audio.error) {
+            aviso.textContent = 'No se pudo reproducir la canción. Inténtalo de nuevo.';
+          }
+        });
+      } else {
+        audio.pause();
+      }
+    });
+    
+    // Si el navegador bloquea la reproducción automática,
+    // empieza con el primer toque o clic en cualquier parte de la página    function iniciarAlTocar() {
+      if (audio.paused) {
+        audio.play().catch(() => {});
+      }
+    }
+    
+    function activarInicioAlTocar() {
+      document.addEventListener('click', iniciarAlTocar);
+      document.addEventListener('touchstart', iniciarAlTocar, { passive: true });
+      document.addEventListener('keydown', iniciarAlTocar);
+      document.addEventListener('scroll', iniciarAlTocar, { passive: true });
+    }
+    
+    function quitarInicioAlTocar() {
+      document.removeEventListener('click', iniciarAlTocar);
+      document.removeEventListener('touchstart', iniciarAlTocar);
+      document.removeEventListener('keydown', iniciarAlTocar);
+      document.removeEventListener('scroll', iniciarAlTocar);
+    }
+    
+    // Intento de reproducción automática al abrir la web (doble clic)    // Los navegadores bloquean autoplay en file://, así que intentamos y si falla mostramos botón    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Autoplay bloqueado - mostramos instrucción visual
+        aviso.textContent = '🎵 Toca la pantalla para escuchar nuestra canción';
+        btnPlay.style.display = 'block';
+      });
+    }
+    audio.addEventListener('canplaythrough', () => {
+      // El audio puede reproducirse ahora
+    });// ----- EFECTO DE PARALLAX EN EL FONDO -----
+    document.addEventListener('mousemove', (e) => {      const mouseX = e.clientX / window.innerWidth - 0.5;      const mouseY = e.clientY / window.innerHeight - 0.5;            const cards = document.querySelectorAll('.carta, .caja-audio, .final');      cards.forEach((card, index) => {        const factor = (index + 1) * 0.05;        const x = mouseX * factor * 10;        const y = mouseY * factor * 10;        card.style.transform = `translate(${x}px, ${y}px)`;      });
+    });
+    // Reset transform cuando el mouse sale
+    document.addEventListener('mouseleave', () => {      const cards = document.querySelectorAll('.carta, .caja-audio, .final');      cards.forEach(card => {        card.style.transform = 'none';      });
+    });
+
+    // ----- CONFETI CELEBRATION -----    function lanzarConfeti() {      const colores = ['#ff69b4', '#ff1493', '#ff69b4', '#ffb6c1', '#c71585', '#da70d6'];      const simbolos = ['❤️', '💖', '💕', '💗', '🌹', '✨'];            for (let i = 0; i < 30; i++) {        setTimeout(() => {          const c = document.createElement('div');          c.style.position = 'fixed';          c.style.width = '10px';          c.style.height = '10px';          c.style.background = colores[Math.floor(Math.random() * colores.length)];          c.style.left = (Math.random() * 100) + 'vw';          c.style.top = '-10px';          c.style.zIndex = '1000';          c.style.borderRadius = '50%';          c.style.pointerEvents = 'none';          document.body.appendChild(c);          
+          // Animar caída
+          const duracion = 3 + Math.random() * 2;
+          c.style.animation = `caer ${duracion}s ease-out forwards`;
+          
+          // Remover después de la animación
+          setTimeout(() => c.remove(), duracion * 1000 + 500);
+        }, i * 20);      }
+    }
+    @keyframes caer {      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }    }
+  </script>
+
+</body>
+</html>
